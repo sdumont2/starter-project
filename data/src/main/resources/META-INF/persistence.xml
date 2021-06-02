@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+    <!-- MongoDB -->
+    <persistence-unit name="ogm-mongodb" transaction-type="JTA">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="MONGODB" />
+            <property name="hibernate.ogm.datastore.database" value="${starter.db.name}" />
+            <property name="hibernate.ogm.datastore.host" value="${starter.db.host}" />
+            <property name="hibernate.ogm.datastore.port" value="${starter.db.port}" />
+            <property name="hibernate.ogm.datastore.username" value="${starter.db.username}" />
+            <property name="hibernate.ogm.datastore.password" value="${starter.db.password}" />
+            <property name="hibernate.ogm.mongodb.authentication_database" value="${starter.db.auth}" />
+            <property name="hibernate.ogm.datastore.create_database" value="true" />
+        </properties>
+    </persistence-unit>
+    <!-- Neo4j -->
+    <persistence-unit name="ogm-neo4j" transaction-type="JTA">
+        <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
+        <properties>
+            <property name="hibernate.ogm.datastore.provider" value="NEO4J_EMBEDDED" />
+            <property name="hibernate.ogm.datastore.database" value="${starter.db.name}" />
+            <property name="hibernate.ogm.datastore.host" value="${starter.db.host}" />
+            <property name="hibernate.ogm.datastore.port" value="${starter.db.port}" />
+            <property name="hibernate.ogm.datastore.username" value="${starter.db.username}" />
+            <property name="hibernate.ogm.datastore.password" value="${starter.db.password}" />
+            <property name="hibernate.ogm.neo4j.database_path" value="target/test_data_dir" />
+        </properties>
+    </persistence-unit>
+    <!-- MySQL -->
+    <persistence-unit name="orm-mysql" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <properties>
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.hbm2dll.create_namespaces" value="true" />
+            <property name="javax.persistence.create-database-schemas" value="true" />
+            <!-- Enable Hibernate's automatic session context management -->
+            <property name="current_session_context_class" value="thread"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
+            <property name="hibernate.connection.url" value="${starter.db.uri}" />
+            <property name="hibernate.connection.username" value="${starter.db.username}" />
+            <property name="hibernate.connection.password" value="${starter.db.password}" />
+        </properties>
+    </persistence-unit>
+</persistence>
